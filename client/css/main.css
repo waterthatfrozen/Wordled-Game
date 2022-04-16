@@ -1,0 +1,15 @@
+html{
+    height: 100%;
+}
+
+body{
+    font-family: 'Inter', sans-serif;
+}
+
+main > .container {
+    padding: 60px 15px 0;
+}
+
+.text-white {
+    color: white;
+}

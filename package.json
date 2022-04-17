@@ -19,6 +19,9 @@
   "homepage": "https://github.com/waterthatfrozen/DES422-Group-Project#readme",
   "dependencies": {
     "bootstrap": "^5.1.3",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "geta-random-word": "^2.0.1",
+    "random-word-by-length": "^0.1.0",
+    "random-words": "^1.1.2"
   }
 }

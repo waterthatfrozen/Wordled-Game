@@ -13,46 +13,144 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/main.css">
     <title>Wordled</title>
 </head>
 
 <body class="d-flex flex-column h-100">
-
+    <!-- Header Nav -->
     <header>
         <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold" href="#">Wordled</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                  </button>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item"><a class="nav-link" id="main-game-link" href="#">Main Game</a></li>
-                        <li class="nav-item"><a class="nav-link" id="lvl-sel-link" href="#">Level Selector</a></li>
-                        <li class="nav-item"><a class="nav-link" id="worldwide-stat" href="#">Worldwide stats</a></li>
-                        <li class="nav-item"><a class="nav-link" id="how-to-play" href="#">How to Play</a></li>
+                        <li class="nav-item"><a class="nav-link" id="main-game-link" href="/">Main Game</a></li>
+                        <li class="nav-item"><a class="nav-link" id="worldwide-stat" href="/world-stats">Worldwide
+                                stats</a></li>
+                        <li class="nav-item"><a class="nav-link" id="how-to-play" href="/how-to-play">How to Play</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
+    <!-- Main Content -->
     <main class="flex-shrink-0">
         <div class="container">
-            <h1 class="mt-5">WORDLED</h1>
-            <p class="lead">Now in construction</p>
-        </div> 
+            <div class="row">
+                <div class="col text-center mb-1">
+                    <h3>WORDLED</h3>
+                </div>
+            </div>
+            <div class="row" id="guess-1">
+                <div class="col tile tile-number" id="empty">1</div>
+                <div class="col tile tile-empty" id="tile-00"> </div>
+                <div class="col tile tile-empty" id="tile-01"> </div>
+                <div class="col tile tile-empty" id="tile-02"> </div>
+                <div class="col tile tile-empty" id="tile-03"> </div>
+                <div class="col tile tile-empty" id="tile-04"> </div>
+                <div class="col tile" id="gap"></div>
+            </div>
+            <div class="row" id="guess-2">
+                <div class="col tile tile-number" id="empty">2</div>
+                <div class="col tile tile-empty" id="tile-10"> </div>
+                <div class="col tile tile-empty" id="tile-11"> </div>
+                <div class="col tile tile-empty" id="tile-12"> </div>
+                <div class="col tile tile-empty" id="tile-13"> </div>
+                <div class="col tile tile-empty" id="tile-14"> </div>
+                <div class="col tile" id="gap"></div>
+            </div>
+            <div class="row" id="guess-3">
+                <div class="col tile tile-number" id="empty">3</div>
+                <div class="col tile tile-empty" id="tile-20"> </div>
+                <div class="col tile tile-empty" id="tile-21"> </div>
+                <div class="col tile tile-empty" id="tile-22"> </div>
+                <div class="col tile tile-empty" id="tile-23"> </div>
+                <div class="col tile tile-empty" id="tile-24"> </div>
+                <div class="col tile" id="gap"></div>
+            </div>
+            <div class="row" id="guess-4">
+                <div class="col tile tile-number" id="empty">4</div>
+                <div class="col tile tile-empty" id="tile-30"> </div>
+                <div class="col tile tile-empty" id="tile-31"> </div>
+                <div class="col tile tile-empty" id="tile-32"> </div>
+                <div class="col tile tile-empty" id="tile-33"> </div>
+                <div class="col tile tile-empty" id="tile-34"> </div>
+                <div class="col tile" id="gap"></div>
+            </div>
+            <div class="row" id="guess-5">
+                <div class="col tile tile-number" id="empty">5</div>
+                <div class="col tile tile-empty" id="tile-40"> </div>
+                <div class="col tile tile-empty" id="tile-41"> </div>
+                <div class="col tile tile-empty" id="tile-42"> </div>
+                <div class="col tile tile-empty" id="tile-43"> </div>
+                <div class="col tile tile-empty" id="tile-44"> </div>
+                <div class="col tile" id="gap"></div>
+            </div>
+            <div class="row" id="guess-6">
+                <div class="col tile tile-number" id="empty">6</div>
+                <div class="col tile tile-empty" id="tile-50"> </div>
+                <div class="col tile tile-empty" id="tile-51"> </div>
+                <div class="col tile tile-empty" id="tile-52"> </div>
+                <div class="col tile tile-empty" id="tile-53"> </div>
+                <div class="col tile tile-empty" id="tile-54"> </div>
+                <div class="col tile" id="gap"></div>
+            </div>
+            <div class="row mt-3">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Guess here" id="guess-word">
+                    <button class="btn btn-secondary" type="button" id="submit">Submit</button>
+                </div>
+                <div class="row">
+                    <div class="col text-center"> - Remaining Characters - </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <span class="char" id="char-a">A</span>
+                        <span class="char" id="char-b">B</span>
+                        <span class="char" id="char-c">C</span>
+                        <span class="char" id="char-d">D</span>
+                        <span class="char" id="char-e">E</span>
+                        <span class="char" id="char-f">F</span>
+                        <span class="char" id="char-g">G</span>
+                        <span class="char" id="char-h">H</span>
+                        <span class="char" id="char-i">I</span>
+                        <span class="char" id="char-j">J</span>
+                        <span class="char" id="char-k">K</span>
+                        <span class="char" id="char-l">L</span>
+                        <span class="char" id="char-m">M</span>
+                        <span class="char" id="char-n">N</span>
+                        <span class="char" id="char-o">O</span>
+                        <span class="char" id="char-p">P</span>
+                        <span class="char" id="char-q">Q</span>
+                        <span class="char" id="char-r">R</span>
+                        <span class="char" id="char-s">S</span>
+                        <span class="char" id="char-t">T</span>
+                        <span class="char" id="char-u">U</span>
+                        <span class="char" id="char-v">V</span>
+                        <span class="char" id="char-w">W</span>
+                        <span class="char" id="char-x">X</span>
+                        <span class="char" id="char-y">Y</span>
+                        <span class="char" id="char-z">Z</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
-
-
-    <footer class="d-flex flex-wrap px-5 py-3 mt-auto bg-secondary text-light small">
-        Members: Paphana Y. (6222780379), Phakin C. (6222780882), Time K. (6222790345) <br/>
-        Wordled (Wordle Clone), DES422 Group Project, Semester 2, Academic Year 2021, SIIT.
+    <!-- Footer -->
+    <footer class="d-flex flex-wrap px-5 py-2 mt-auto bg-secondary text-center w-100 text-light smaller-font">
+        Members: Paphana Y. (6222780379), Phakin C. (6222780882), Time K. (6222790345) | Wordled (Wordle Clone), DES422
+        Group Project, Semester 2, Academic Year 2021, SIIT.
     </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 
 </html>

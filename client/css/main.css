@@ -4,12 +4,82 @@ html{
 
 body{
     font-family: 'Inter', sans-serif;
+    align-content: center;
 }
 
-main > .container {
-    padding: 60px 15px 0;
+main{
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+}
+
+main .container {
+    padding-top: 60px;
 }
 
 .text-white {
     color: white;
+}
+
+.tile {
+    padding: 0.5rem;
+    margin: 0.25rem;
+    text-align: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+.tile-number{
+    text-align: right;
+}
+
+.tile-empty{
+    border: #989898 solid 2px;
+}
+
+.tile-correct {
+    background-color: #4CAF50;
+    border: #4CAF50 solid 2px;
+    color: white;
+}
+
+.tile-present{
+    background-color: #DDC437;
+    border: #DDC437 solid 2px;
+    color: white;
+}
+
+.tile-absent{
+    background-color: #494949;
+    border: #494949 solid 2px;
+    color: white;
+}
+
+.smaller-font{
+    font-size: 0.8rem;
+}
+
+footer{
+    text-align: center;
+}
+
+.char{
+    text-transform: uppercase;
+}
+
+.char-correct{
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.char-present{
+    color: #DDC437;
+    font-weight: bold;
+}
+
+.char-absent{
+    color: #FFFFFF;
 }

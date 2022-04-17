@@ -1,19 +1,29 @@
+"use strict"; 
+
 var express = require("express"),
 	http = require("http"),
 	app;
 
-// Create our Express-powered HTTP server
-// and have it listen on port 8080
-
 app = express();
-app.use(express.static(__dirname + "/client"));
-http.createServer(app).listen(8080);
+const path = __dirname + "/client";
+app.use(express.static(path));
+const port = process.env.PORT || 8080;
+http.createServer(app).listen(port);
+console.log('Server started at http://localhost:' + port);
 
 // set up our routes
 app.get("/hello", function (req, res) {
     res.send("Hello World!");
 });
 
-app.get("/goodbye", function (req, res) {
-	res.send("Goodbye World!");
+app.get("/",function(req,res){
+	res.sendFile(path+"/index.html");
+});
+
+app.get("/world-stats",function(req,res){
+	res.sendFile(path+"/stats.html");
+});
+
+app.get("/how-to-play",function(req,res){
+	res.sendFile(path+"/instruction.html");
 });

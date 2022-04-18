@@ -7,9 +7,9 @@ var express = require("express"),
 app = express();
 const path = __dirname + "/client";
 app.use(express.static(path));
-const port = process.env.PORT || 8080;
+const port = 8080;
 http.createServer(app).listen(port);
-console.log('Server started at http://localhost:' + port);
+console.log('Server started');
 
 // set up our routes
 app.get("/hello", function (req, res) {

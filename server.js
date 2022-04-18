@@ -7,8 +7,7 @@ var express = require("express"),
 app = express();
 const path = __dirname + "/client";
 app.use(express.static(path));
-const port = 8080;
-http.createServer(app).listen(port);
+http.createServer(app).listen(process.env.PORT || 8080);
 console.log('Server started');
 
 // set up our routes

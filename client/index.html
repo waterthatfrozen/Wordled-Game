@@ -43,13 +43,8 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-shrink-0">
+    <main class="flex-shrink-0 mb-3">
         <div class="container">
-            <div class="row">
-                <div class="col text-center mb-1">
-                    <h3>WORDLED</h3>
-                </div>
-            </div>
             <div class="row" id="guess-1">
                 <div class="col tile tile-number" id="empty">1</div>
                 <div class="col tile tile-empty" id="tile-00"> </div>
@@ -106,13 +101,13 @@
             </div>
             <div class="row mt-3">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Guess here" id="guess-word" required>
+                    <input type="text" class="form-control" placeholder="Guess here" id="guess-word" required maxlength="5">
                     <button class="btn btn-secondary" type="button" id="guess-button">Submit</button>
                 </div>
-                <div class="row">
+                <div class="row" id="remain-title">
                     <div class="col text-center"> - Remaining Characters - </div>
                 </div>
-                <div class="row">
+                <div class="row" id="remain-char">
                     <div class="col text-center">
                         <span class="char" id="char-a">A</span>
                         <span class="char" id="char-b">B</span>
@@ -142,6 +137,8 @@
                         <span class="char" id="char-z">Z</span>
                     </div>
                 </div>
+                <div class="row" id="definition">
+                    <div class="col text-center" id="word-def" hidden> </div>
             </div>
         </div>
     </main>

@@ -21,7 +21,7 @@ const path = __dirname + "/client";
 app.use(express.static(path));
 http.createServer(app).listen(80);
 // https.createServer(options, app).listen(443);
-console.log('Server started at http://localhost and https://localhost');
+console.log('Server started at http://localhost');
 
 // set up our routes
 app.get("/hello", function (req, res) {

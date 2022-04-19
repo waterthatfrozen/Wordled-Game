@@ -1,27 +1,17 @@
 "use strict"; 
 
 var express = require("express"),
-	// https = require("https"),
 	http = require("http"),
-	// fs = require("fs"),
 	app;
 
 app = express();
 
-// var options = {
-// 	key: fs.readFileSync(__dirname + '/cert/server.key'),
-// 	cert: fs.readFileSync(__dirname + '/cert/server.cert')
-// };
-
-// const bodyParser = require("body-parser");
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
-
 const path = __dirname + "/client";
+const PORT = process.env.PORT || 3000;
 app.use(express.static(path));
-http.createServer(app).listen(80);
-// https.createServer(options, app).listen(443);
-console.log('Server started at http://localhost');
+http.createServer(app).listen(PORT, function() {
+	console.log("Server listening on: http://localhost:"+PORT);
+});
 
 // set up our routes
 app.get("/hello", function (req, res) {

@@ -42,6 +42,14 @@ app.get("/how-to-play",function(_req,res){
 	res.sendFile(path+"/instruction.html");
 });
 
+app.get("/project-info",function(_req,res){
+	res.sendFile(path+"/info.html");
+});
+
+app.get("/world-reset",function(_req,res){
+	res.sendFile(path+"/reset.html");
+});
+
 app.get("/get-stats",function(_req,res){
 	scoreModel.find({}).sort({score: -1}).exec(function(err,obj){
 		if(err){
@@ -63,10 +71,6 @@ app.get("/reset-stats",function(_req,res){
 		}
 		res.send(response);
 	});
-});
-
-app.get("/world-reset",function(_req,res){
-	res.sendFile(path+"/reset.html");
 });
 
 app.post("/update-stats",function(req,res){

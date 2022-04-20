@@ -18,6 +18,7 @@ async function random_new_word(length){
     let data = await response.json();
     let word = await data[0];
     if(await isValidWord(word)){
+        console.log("Word: "+word);
         return word;
     }else{
         return random_new_word(length);

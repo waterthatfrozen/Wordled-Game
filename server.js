@@ -54,28 +54,40 @@ app.get("/get-stats",function(_req,res){
 
 app.get("/reset-stats",function(_req,res){
 	scoreModel.updateMany({},{$set:{"count":0}},function(err,_obj){
+		var response = {};
 		if(err){
-			res.send("Reset wordled stats failed!\nError: "+err);
+			response.status = "failed";
 		}else{
-			res.send("Reset wordled stats successful!");
+			response.status = "success";
+			response.message = "Reset wordled stats successful!";
 		}
+		res.send(response);
 	});
+});
+
+app.get("/world-reset",function(_req,res){
+	res.sendFile(path+"/reset.html");
 });
 
 app.post("/update-stats",function(req,res){
 	var score = req.body.score;
+	var response = {};
 	scoreModel.findOne({"score":{$eq:score}}, function(err, obj){
 		if(err){
-			res.send("error with finding record "+err);
+			response.status = "failed";
+			response.message = "Error finding stats " + err;
 		}else{
 			var new_count = obj["count"] + 1;
-			scoreModel.updateOne({"score":score},{$set:{"count":new_count}}, function(err, _obj){
-				if(err){
-					res.send("error with finding record "+err);
+			scoreModel.updateOne({"score":score},{$set:{"count":new_count}}, function(err2, _obj){
+				if(err2){
+					response.status = "failed";
+					response.message = "Error updating stats " + err2;
 				}else{
-					res.send("update stats record successful");
+					response.status = "success";
+					response.message = "Updated stats successfully!";
 				}
 			});
 		}
+		res.send(response);
 	});
 });

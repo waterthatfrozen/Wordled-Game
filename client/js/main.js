@@ -79,8 +79,12 @@ async function wordle_gameover(current){
 }
 
 async function record_score(score){
-    
-    console.log("score: "+score);
+    let data = { score: score};
+    await fetch("/update-stats", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    }).then( res => console.log(res)).catch(err => console.log(err));
 }
 
 async function wordle_game(guess,current){

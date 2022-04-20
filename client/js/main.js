@@ -1,10 +1,15 @@
 var state = 0;
+var used_words = [];
 
 async function isValidWord(word){
-    var url = "https://api.dictionaryapi.dev/api/v2/entries/en/"+word;
-    let response = await fetch(url);
-    let data = await response.json();
-    return data.title != "No Definitions Found";
+    if(await used_words.includes(word)){
+        return false;
+    }else{    
+        var url = "https://api.dictionaryapi.dev/api/v2/entries/en/"+word;
+        let response = await fetch(url);
+        let data = await response.json();
+        return data.title != "No Definitions Found";
+    }
 }
 
 async function random_new_word(length){
@@ -22,12 +27,10 @@ async function random_new_word(length){
 async function wordle_isWin(result){
     var count = 0;
     await result.forEach(function(element){
-        console.log(element);
         if(element.result=="correct"){
             count++;
         }
     });
-    console.log(count);
     return count == 5;
 }
 
@@ -67,13 +70,11 @@ async function showDefiniton(word){
 }
 
 async function wordle_congrats(){
-    console.log("win!");
     $("input#guess-word").off("keyup").val("Congratulations! You won!").attr("disabled",true).addClass("bg-success text-white border-success");
     $("button#guess-button").off("click").text("Play again?").addClass("bg-primary text-white border-primary").attr("onclick","location.reload();");
 }
 
 async function wordle_gameover(current){
-    console.log("game over!");
     $("input#guess-word").off("keyup").val("The word is "+current.toUpperCase()).attr("disabled",true).addClass("bg-danger text-white border-danger");
     $("button#guess-button").off("click").text("Play again?").addClass("bg-primary text-white border-primary").attr("onclick","location.reload();");
 }
@@ -84,51 +85,62 @@ async function record_score(score){
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
-    }).then( res => console.log(res)).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+}
+
+async function box_disable(message = "Checking..."){
+    $("input#guess-word").prop("disabled",true);
+    $("button#guess-button").prop("disabled",true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> '+message).toggleClass("btn-primary btn-secondary");
+}
+
+async function box_enable(message = " Submit"){
+    $("input#guess-word").prop("disabled",false);
+    $("button#guess-button").prop("disabled",false).text(message).toggleClass("btn-primary btn-secondary");
 }
 
 async function wordle_game(guess,current){
-    console.log("guess word: "+guess);
-    console.log("current word: "+current);
+    box_disable();
     let valid = await isValidWord(guess);
-    console.log("valid: "+valid);
+    used_words.push(guess);
     if(valid){
         $("input#guess-word").val("");
         $("input#guess-word").removeClass("border-danger");
         var url = "https://v1.wordle.k2bd.dev/word/"+current+"?guess="+guess;
         let response = await fetch(url);
         let data = await response.json();
-        console.log(data);
         await update_grid(data);
         state++;
         if(await wordle_isWin(data)){
             wordle_congrats();
             showDefiniton(current);
             record_score(state);
+            $("button#guess-button").prop("disabled",false);
         }else{
-            console.log("not win yet!");
             // update grid
             //game over condition
             if(state == 6){
+                state = -1;
                 wordle_gameover(current);
                 showDefiniton(current);
-                state = -1;
                 record_score(state);
+                $("button#guess-button").prop("disabled",false);
+            }else{
+                box_enable();
             }
-            console.log("state: "+state);
         }
+        
     }else{
-        console.log("invalid word");
-        window.alert("Invalid word");
+        window.alert("Invalid word!\nPlease try another word.");
         $("input#guess-word").addClass("border-danger");
+        box_enable();
     }
 }
 
 async function main(){
     "use strict";
-    console.log("start");
+    box_disable("Please wait...");
     let current_word = await random_new_word(5);
-    console.log(current_word);
+    box_enable();
     // detect click button
     $("button#guess-button").on("click",function(event){
         event.preventDefault();
@@ -152,7 +164,6 @@ async function main(){
             }
         }
     });
-    console.log("end");
 }
 
 $(document).ready(main);
